@@ -98,11 +98,15 @@ update_status ModuleSceneKen::Update()
 
 	App->player->Update();
 
-	// TODO 10: Build an entire new scene "honda", you can find its
+	// TODO 10: Build an entire new scene "honda", you can find its --- DONE
 	// and music in the Game/ folder
 
 	// TODO 11: Make that pressing space triggers a switch to honda logic module
 	// using FadeToBlack module
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	{
+		App->fade->FadeToBlack((Module*)App->scene_honda, this);
+	}
 
 	return UPDATE_CONTINUE;
 }

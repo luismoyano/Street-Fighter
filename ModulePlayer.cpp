@@ -11,7 +11,7 @@ ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 {
 	speed = 1.0f;
 	position.x = 100;
-	position.y = 110;
+	position.y = 120;
 
 	// idle animation (arcade sprite sheet)
 	idle.frames.push_back({7, 14, 60, 90});

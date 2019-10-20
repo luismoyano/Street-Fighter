@@ -78,13 +78,18 @@ bool ModuleSceneHonda::CleanUp()
 update_status ModuleSceneHonda::Update()
 {
 	// Draw everything --------------------------------------
-	App->renderer->Blit(graphics, 0, 0, &background, 1.08f, 1.12f);
-	App->renderer->Blit(graphics, 0, 0, &roof, 1.08f, 1.12f);
-	App->renderer->Blit(graphics, 0, -8, &foreground, 1.05f, 1.1f); 
-	App->renderer->Blit(graphics, 560, 8, &(pool.GetCurrentFrame()), 1.08f, 1.12f);
-	App->renderer->Blit(graphics, 0, 170, &ground);
+	App->renderer->Blit(graphics, -5, 170, &ground);
+	App->renderer->Blit(graphics, 0, 20, &background, 1.08f, 1.12f);
+	App->renderer->Blit(graphics, -50, 22, &roof, 1.08f, 1.12f);
+	App->renderer->Blit(graphics, 175, 150, &foreground, 1.05f, 1.1f); 
+	App->renderer->Blit(graphics, 200, 163, &(pool.GetCurrentFrame()), 1.05f, 1.1f);
 
 	App->player->Update();
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	{
+		App->fade->FadeToBlack((Module*)App->scene_ken, this);
+	}
 
 	return UPDATE_CONTINUE;
 }
