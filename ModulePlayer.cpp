@@ -9,8 +9,9 @@
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 {
+	speed = 1.0f;
 	position.x = 100;
-	position.y = 216;
+	position.y = 110;
 
 	// idle animation (arcade sprite sheet)
 	idle.frames.push_back({7, 14, 60, 90});
@@ -18,7 +19,7 @@ ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 	idle.frames.push_back({184, 14, 60, 90});
 	idle.frames.push_back({276, 11, 60, 93});
 	idle.frames.push_back({366, 12, 60, 92});
-	idle.speed = 0.2f;
+	idle.speed = 0.11f;
 	
 	// walk backward animation (arcade sprite sheet)
 	backward.frames.push_back({542, 131, 61, 87});
@@ -30,6 +31,13 @@ ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 	backward.speed = 0.1f;
 
 	// TODO 8: setup the walk forward animation from ryu4.png
+	forward.frames.push_back({ 10, 120, 57, 100 });
+	forward.frames.push_back({ 79, 120, 57, 100});
+	forward.frames.push_back({ 158, 120, 57, 100 });
+	forward.frames.push_back({ 255, 120, 57, 100 });
+	forward.frames.push_back({ 349, 120, 57, 100 });
+	forward.frames.push_back({ 429, 120, 57, 100 });
+	forward.speed = 0.12f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -64,5 +72,32 @@ update_status ModulePlayer::Update()
 	// make sure to detect player movement and change its
 	// position while cycling the animation(check Animation.h)
 
+	updatePosition();
+	updateAnimState();
+
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::updatePosition()
+{
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		position.x -= speed;
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		position.x += speed;
+}
+
+void ModulePlayer::updateAnimState()
+{
+	Animation* current = nullptr;
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		current = &backward;
+
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		current = &forward;
+
+	else current = &idle;
+
+
+	App->renderer->Blit(graphics, position.x, position.y, &(current->GetCurrentFrame()), 1.08f, 1.12f);
 }

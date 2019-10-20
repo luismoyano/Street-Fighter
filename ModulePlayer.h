@@ -20,10 +20,15 @@ public:
 
 public:
 
+	float speed;
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation backward;
+	Animation forward;
 	iPoint position;
+
+	void updatePosition();
+	void updateAnimState();
 };
 
 #endif // __MODULEPLAYER_H__

@@ -88,11 +88,13 @@ update_status ModuleSceneKen::Update()
 
 	// TODO 3: Draw the ship. Be sure to tweak the speed. --- DONE
 	App->renderer->Blit(graphics, 0, -8, &foreground, 1.05f, 1.1f); // Red ship
-	App->renderer->Blit(graphics, 192, 100, &(bgGirl.GetCurrentFrame()), 1.05f, 1.1f); // flag animation
+	App->renderer->Blit(graphics, 192, 100, &(bgGirl.GetCurrentFrame()), 1.05f, 1.1f); // Girl animation
 
 	// TODO 6: Draw the girl. Make sure it follows the ship movement! --- DONE
 	
 	App->renderer->Blit(graphics, 0, 170, &ground);
+
+	App->player->Update();
 
 	// TODO 10: Build an entire new scene "honda", you can find its
 	// and music in the Game/ folder
