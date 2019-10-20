@@ -24,6 +24,7 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation flag;
+	Animation bgGirl;
 };
 
 #endif // __MODULESCENEKEN_H__
