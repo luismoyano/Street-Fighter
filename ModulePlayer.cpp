@@ -42,7 +42,7 @@ ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 
 ModulePlayer::~ModulePlayer()
 {
-	// Homework : check for memory leaks
+	// Homework : check for memory leaks --- Tried with dr memory and haven't found anything...
 }
 
 // Load assets
