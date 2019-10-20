@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL.h"
+#include <cmath>
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -78,17 +79,18 @@ bool ModuleSceneKen::CleanUp()
 // Update: draw background
 update_status ModuleSceneKen::Update()
 {
-	// TODO 5: make sure the ship goes up and down
+	// TODO 5: make sure the ship goes up and down --- DONE
 
 	// Draw everything --------------------------------------
 	// TODO 1: Tweak the movement speed of the sea&sky + flag to your taste --- DONE (Small improvement created as well)
 	App->renderer->Blit(graphics, 0, 0, &background, 1.08f, 1.12f); // sea and sky
-	App->renderer->Blit(graphics, 0, -8, &foreground, 1.05f, 1.1f); // Red ship
 	App->renderer->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 1.08f, 1.12f); // flag animation
 
 	// TODO 3: Draw the ship. Be sure to tweak the speed. --- DONE
-	App->renderer->Blit(graphics, 0, -8, &foreground, 1.05f, 1.1f); // Red ship
-	App->renderer->Blit(graphics, 192, 100, &(bgGirl.GetCurrentFrame()), 1.05f, 1.1f); // Girl animation
+	App->renderer->Blit(graphics, 0, -8 + (shipSpeed * sin(shipCycle)), &foreground, 1.05f, 1.1f); // Red ship
+	App->renderer->Blit(graphics, 192, 100 + (shipSpeed * sin(shipCycle)), &(bgGirl.GetCurrentFrame()), 1.05f, 1.1f); // Girl animation
+	shipCycle += 0.1f;
+
 
 	// TODO 6: Draw the girl. Make sure it follows the ship movement! --- DONE
 	

@@ -19,6 +19,9 @@ public:
 
 public:
 	
+	float shipSpeed = 0.2f;
+	float shipCycle = 0.1f;
+
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ground;
 	SDL_Rect foreground;
